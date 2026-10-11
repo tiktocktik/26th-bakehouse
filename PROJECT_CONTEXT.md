@@ -4,7 +4,7 @@
 > **Brand**: `26th Bakehouse` (formerly Page 26 / Ovenhug)  
 > **Repository**: `https://github.com/tiktocktik/page-26-menu`  
 > **Production Deployment**: `https://page26.vercel.app`  
-> **Local Directory**: `D:\Projects\26th-bakehouse`  
+> **Local Directory**: `D:\Workspace\01_Projects\Code\26th-bakehouse`  
 > **Primary Business Contact**: WhatsApp `+91 8780547928` (Bangalore, India)
 
 ---
