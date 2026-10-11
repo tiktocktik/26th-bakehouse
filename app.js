@@ -1,12 +1,12 @@
 // ==========================================================================
-// PAGE 26 — Artisanal Eggless Patisserie & Bakes (Bangalore)
+// 26TH BAKEHOUSE — Artisanal Eggless Patisserie & Bakes (Bangalore)
 // Core Application Logic & WhatsApp Pre-Order Engine
 // ==========================================================================
 
 const PHONE_NUMBER = "918780547928";
 let cart = []; // Array of { id, name, size, unitPrice, qty, minQty, serving }
 let pinnedLocationUrl = "";
-let currentFilter = "all";
+let currentFilter = window.INITIAL_CATEGORY || "all";
 let searchQuery = "";
 const selectedOptions = {};
 
@@ -57,6 +57,12 @@ function setupDatePicker() {
 // --------------------------------------------------------------------------
 function setupCategoryNav() {
   const chips = document.querySelectorAll(".nav-chip");
+  // Sync initial active state to currentFilter (useful for category pages)
+  chips.forEach((c) => {
+    const isCur = c.getAttribute("data-category") === currentFilter;
+    c.classList.toggle("active", isCur);
+    c.setAttribute("aria-selected", isCur ? "true" : "false");
+  });
   chips.forEach((chip) => {
     chip.addEventListener("click", () => {
       chips.forEach((c) => {
@@ -135,11 +141,58 @@ function renderProducts() {
   if (!container || !window.PAGE26_ITEMS) return;
   container.innerHTML = "";
 
+  // 1. HOME PAGE CURATED MODE: Display only 4 Chef's Signature Bestsellers unless searching or filtering
+  if (window.IS_HOME_PAGE && currentFilter === "all" && !searchQuery) {
+    const featuredIds = ["cc-classic-newyork", "cc-biscoff", "cake-ganache", "brownie-classic"];
+    const featuredItems = window.PAGE26_ITEMS.filter((i) => featuredIds.includes(i.id));
+
+    const section = document.createElement("section");
+    section.className = "menu-category-section";
+    section.id = "sec-featured-bestsellers";
+    section.setAttribute("aria-labelledby", "heading-featured");
+
+    section.innerHTML = `
+      <div class="category-header-banner">
+        <div class="cat-title-group">
+          <h2 class="category-heading" id="heading-featured">Chef's Signature Bestsellers</h2>
+          <span class="category-badge-pill">MOST LOVED CREATIONS</span>
+          <div class="veg-seal" title="100% Eggless Vegetarian">
+            <span class="veg-seal-dot"></span>
+          </div>
+        </div>
+        <span class="category-note-right">Slow-baked fresh to order • 1 week notice</span>
+      </div>
+      <div class="product-grid" id="grid-featured"></div>
+      
+      <div class="home-menu-explore-banner">
+        <h3 class="h-explore-title">Explore Our Complete 16-Item Handcrafted Menu</h3>
+        <p class="h-explore-sub">Browse full variety menus with all sizes, weights, custom celebration plaque options, and gift boxes.</p>
+        <div class="h-explore-buttons">
+          <a href="cheesecakes.html" class="btn-explore-cat">🍰 Baked Cheesecakes (5)</a>
+          <a href="cakes.html" class="btn-explore-cat">🎂 Celebration Cakes (3)</a>
+          <a href="brownies.html" class="btn-explore-cat">🍫 Fudgy Brownies (3)</a>
+          <a href="muffins.html" class="btn-explore-cat">🧁 Bakery Muffins (2)</a>
+          <a href="cupcakes.html" class="btn-explore-cat">🧁 Artisanal Cupcakes (3)</a>
+        </div>
+      </div>
+    `;
+
+    container.appendChild(section);
+    const grid = section.querySelector("#grid-featured");
+    featuredItems.forEach((item) => {
+      grid.appendChild(createProductCard(item));
+    });
+
+    if (zeroState) zeroState.style.display = "none";
+    return;
+  }
+
+  // 2. CATEGORY PAGES OR ACTIVE SEARCH/FILTER MODE
   const categories = window.PAGE26_CATEGORIES.filter((c) => c.id !== "all");
   let totalMatched = 0;
 
   categories.forEach((cat) => {
-    if (currentFilter !== "all" && currentFilter !== cat.id) return;
+    if (!searchQuery && currentFilter !== "all" && currentFilter !== cat.id) return;
 
     let items = window.PAGE26_ITEMS.filter((i) => i.category === cat.id);
 
@@ -195,6 +248,61 @@ function renderProducts() {
 // --------------------------------------------------------------------------
 // 6. Create Individual Product Vitrine Card (Studio Food Photography)
 // --------------------------------------------------------------------------
+// --------------------------------------------------------------------------
+// 6. Create Individual Product Vitrine Card (Swiggy/Shopify UX Standard)
+// --------------------------------------------------------------------------
+function syncCardState(card, item) {
+  if (!card || !item) return;
+  const selectedIdx = selectedOptions[item.id] !== undefined ? selectedOptions[item.id] : 0;
+  const curOption = item.options[selectedIdx];
+  const inCartItem = cart.find((c) => c.id === item.id && c.size === curOption.size);
+  const inCartQty = inCartItem ? inCartItem.qty : 0;
+  const minAllowed = curOption.minQty || 1;
+
+  const priceLabel = card.querySelector(".price-label");
+  const priceVal = card.querySelector(`#price-${item.id}`);
+  const addBtn = card.querySelector(".btn-card-add");
+  const stepper = card.querySelector(".stepper-widget");
+  const stepperVal = card.querySelector(".stepper-val");
+  const servingEl = card.querySelector(`#serving-${item.id}`);
+
+  if (servingEl && curOption.serving) {
+    servingEl.textContent = curOption.serving;
+  }
+
+  if (inCartQty > 0) {
+    card.classList.add("card-in-cart");
+    if (priceLabel) priceLabel.textContent = "Subtotal";
+    if (priceVal) priceVal.textContent = `₹${(curOption.price * inCartQty).toLocaleString("en-IN")}`;
+    if (addBtn) addBtn.classList.add("is-hidden");
+    if (stepper) {
+      stepper.classList.remove("is-hidden");
+      if (stepperVal) stepperVal.textContent = inCartQty;
+    }
+  } else {
+    card.classList.remove("card-in-cart");
+    if (priceLabel) priceLabel.textContent = "Price";
+    if (priceVal) priceVal.textContent = `₹${curOption.price.toLocaleString("en-IN")}`;
+    if (addBtn) addBtn.classList.remove("is-hidden");
+    if (stepper) {
+      stepper.classList.add("is-hidden");
+      if (stepperVal) stepperVal.textContent = minAllowed;
+    }
+  }
+}
+
+function syncAllProductCards() {
+  document.querySelectorAll(".patisserie-card").forEach((card) => {
+    const itemId = card.getAttribute("data-id");
+    if (window.PAGE26_ITEMS) {
+      const item = window.PAGE26_ITEMS.find((i) => i.id === itemId);
+      if (item) {
+        syncCardState(card, item);
+      }
+    }
+  });
+}
+
 function createProductCard(item) {
   const card = document.createElement("article");
   card.className = "patisserie-card";
@@ -207,7 +315,7 @@ function createProductCard(item) {
 
   let selectedIdx = selectedOptions[item.id];
   let curOption = item.options[selectedIdx];
-  let qty = curOption.minQty || 1;
+  let minQty = curOption.minQty || 1;
 
   card.innerHTML = `
     <!-- Studio Product Photography Media Vitrine -->
@@ -281,16 +389,11 @@ function createProductCard(item) {
       <!-- Live Pricing & Order Action Bar -->
       <div class="card-bottom-bar">
         <div class="card-price-stack">
-          <span class="price-label">Subtotal</span>
-          <span class="price-value" id="price-${item.id}">₹${(curOption.price * qty).toLocaleString("en-IN")}</span>
+          <span class="price-label">Price</span>
+          <span class="price-value" id="price-${item.id}">₹${curOption.price.toLocaleString("en-IN")}</span>
         </div>
 
         <div class="card-action-controls">
-          <div class="stepper-widget">
-            <button type="button" class="stepper-btn btn-dec" aria-label="Decrease quantity">−</button>
-            <span class="stepper-val">${qty}</span>
-            <button type="button" class="stepper-btn btn-inc" aria-label="Increase quantity">+</button>
-          </div>
           <button type="button" class="btn-card-add" aria-label="Add ${item.name} to pre-order bag">
             <span class="btn-add-icon">
               <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
@@ -298,8 +401,13 @@ function createProductCard(item) {
                 <line x1="5" y1="12" x2="19" y2="12"></line>
               </svg>
             </span>
-            <span>+ Add</span>
+            <span>Add</span>
           </button>
+          <div class="stepper-widget is-hidden" aria-label="Quantity for ${item.name}">
+            <button type="button" class="stepper-btn btn-dec" aria-label="Decrease quantity">−</button>
+            <span class="stepper-val">${minQty}</span>
+            <button type="button" class="stepper-btn btn-inc" aria-label="Increase quantity">+</button>
+          </div>
         </div>
       </div>
     </div>
@@ -319,23 +427,6 @@ function createProductCard(item) {
 
   // Size chips click handler
   const chips = card.querySelectorAll(".size-chip");
-  const priceEl = card.querySelector(`#price-${item.id}`);
-  const servingEl = card.querySelector(`#serving-${item.id}`);
-  const stepperVal = card.querySelector(".stepper-val");
-
-  function getMinAllowed() {
-    const opt = item.options[selectedOptions[item.id] || 0];
-    return opt.minQty || 1;
-  }
-
-  function updatePriceDisplay() {
-    const opt = item.options[selectedOptions[item.id] || 0];
-    priceEl.textContent = `₹${(opt.price * qty).toLocaleString("en-IN")}`;
-    if (servingEl && opt.serving) {
-      servingEl.textContent = opt.serving;
-    }
-  }
-
   chips.forEach((chip) => {
     chip.addEventListener("click", (e) => {
       e.stopPropagation();
@@ -343,41 +434,56 @@ function createProductCard(item) {
       selectedOptions[item.id] = idx;
       chips.forEach((c) => c.classList.remove("active"));
       chip.classList.add("active");
-
-      const minAllowed = getMinAllowed();
-      if (qty < minAllowed) {
-        qty = minAllowed;
-        stepperVal.textContent = qty;
-      }
-      updatePriceDisplay();
+      syncCardState(card, item);
     });
   });
 
-  // Quantity Steppers
-  card.querySelector(".btn-dec").addEventListener("click", (e) => {
+  // Add to Pre-order Bag Action: morphs into active stepper
+  const addBtn = card.querySelector(".btn-card-add");
+  addBtn.addEventListener("click", (e) => {
     e.stopPropagation();
-    const minAllowed = getMinAllowed();
-    if (qty > minAllowed) {
-      qty -= 1;
-      stepperVal.textContent = qty;
-      updatePriceDisplay();
+    const opt = item.options[selectedOptions[item.id] || 0];
+    const initialQty = opt.minQty || 1;
+    addToCart(item, opt, initialQty);
+    showToast(`Added ${initialQty}x ${item.name} (${opt.size})`);
+    syncCardState(card, item);
+  });
+
+  // Quantity Stepper Decrement (decrements or removes when at minQty)
+  const decBtn = card.querySelector(".btn-dec");
+  decBtn.addEventListener("click", (e) => {
+    e.stopPropagation();
+    const opt = item.options[selectedOptions[item.id] || 0];
+    const cartIdx = cart.findIndex((c) => c.id === item.id && c.size === opt.size);
+    if (cartIdx >= 0) {
+      const currentQty = cart[cartIdx].qty;
+      const minAllowed = opt.minQty || 1;
+      if (currentQty > minAllowed) {
+        updateCartQty(cartIdx, currentQty - 1);
+      } else {
+        removeFromCart(cartIdx);
+        showToast(`Removed ${item.name} from pre-order`);
+      }
+      syncCardState(card, item);
     }
   });
 
-  card.querySelector(".btn-inc").addEventListener("click", (e) => {
-    e.stopPropagation();
-    qty += 1;
-    stepperVal.textContent = qty;
-    updatePriceDisplay();
-  });
-
-  // Add to Pre-order Bag Action
-  card.querySelector(".btn-card-add").addEventListener("click", (e) => {
+  // Quantity Stepper Increment
+  const incBtn = card.querySelector(".btn-inc");
+  incBtn.addEventListener("click", (e) => {
     e.stopPropagation();
     const opt = item.options[selectedOptions[item.id] || 0];
-    addToCart(item, opt, qty);
-    showToast(`Added ${qty}x ${item.name} (${opt.size})`);
+    const cartIdx = cart.findIndex((c) => c.id === item.id && c.size === opt.size);
+    if (cartIdx >= 0) {
+      updateCartQty(cartIdx, cart[cartIdx].qty + 1);
+    } else {
+      addToCart(item, opt, opt.minQty || 1);
+    }
+    syncCardState(card, item);
   });
+
+  // Initialize card state based on current cart
+  syncCardState(card, item);
 
   return card;
 }
@@ -463,6 +569,7 @@ function addToCart(item, opt, qty) {
   saveCartToStorage();
   updateDockUI();
   renderCartItems();
+  syncAllProductCards();
 }
 
 function removeFromCart(index) {
@@ -470,6 +577,7 @@ function removeFromCart(index) {
   saveCartToStorage();
   updateDockUI();
   renderCartItems();
+  syncAllProductCards();
 }
 
 function updateCartQty(index, newQty) {
@@ -484,6 +592,7 @@ function updateCartQty(index, newQty) {
   saveCartToStorage();
   updateDockUI();
   renderCartItems();
+  syncAllProductCards();
 }
 
 function clearCart() {
@@ -492,19 +601,20 @@ function clearCart() {
     saveCartToStorage();
     updateDockUI();
     renderCartItems();
+    syncAllProductCards();
     showToast("Pre-order cleared");
   }
 }
 
 function saveCartToStorage() {
   try {
-    localStorage.setItem("page26_cart", JSON.stringify(cart));
+    localStorage.setItem("bakehouse26_cart", JSON.stringify(cart));
   } catch (e) {}
 }
 
 function loadCartFromStorage() {
   try {
-    const saved = localStorage.getItem("page26_cart");
+    const saved = localStorage.getItem("bakehouse26_cart") || localStorage.getItem("page26_cart");
     if (saved) {
       cart = JSON.parse(saved);
     }
@@ -879,7 +989,7 @@ function openProductModal(item) {
   const addBtn = document.getElementById("btn-modal-add-cart");
 
   img.src = item.image;
-  img.alt = `${item.name} - Page 26 Artisanal Bakery Bangalore`;
+  img.alt = `${item.name} - 26th Bakehouse Artisanal Bakery Bangalore`;
   title.textContent = item.name;
   
   if (badge) {
@@ -1080,13 +1190,13 @@ function saveFormDraft() {
     pinnedUrl: pinnedLocationUrl
   };
   try {
-    localStorage.setItem("page26_checkout_draft", JSON.stringify(draft));
+    localStorage.setItem("bakehouse26_checkout_draft", JSON.stringify(draft));
   } catch (e) {}
 }
 
 function restoreFormDraft() {
   try {
-    const saved = localStorage.getItem("page26_checkout_draft");
+    const saved = localStorage.getItem("bakehouse26_checkout_draft") || localStorage.getItem("page26_checkout_draft");
     if (!saved) return;
     const draft = JSON.parse(saved);
 
@@ -1158,7 +1268,7 @@ function handleWhatsAppSubmit() {
   } catch (e) {}
 
   // Compile Structured WhatsApp Pre-Order Message
-  let msg = `*PRE-ORDER — PAGE 26 CHEESECAKES & BAKES*\n`;
+  let msg = `*PRE-ORDER — 26TH BAKEHOUSE (CHEESECAKES & PATISSERIE)*\n`;
   msg += `─────────────────────────\n`;
   msg += `*Customer:* ${name}\n`;
   msg += `*Scheduled Date:* ${formattedDate}\n`;
@@ -1191,7 +1301,7 @@ function handleWhatsAppSubmit() {
   }
 
   msg += `─────────────────────────\n`;
-  msg += `_Order submitted via page26.vercel.app_\n`;
+  msg += `_Order submitted via 26th Bakehouse Concierge_\n`;
   msg += `_Notice policy: 1 week advance notice acknowledged._`;
 
   const waUrl = `https://wa.me/${PHONE_NUMBER}?text=${encodeURIComponent(msg)}`;
@@ -1214,3 +1324,22 @@ function showToast(message) {
     toast.classList.remove("show");
   }, 2800);
 }
+
+// --------------------------------------------------------------------------
+// 15. Visual Category Grid Interactivity
+// --------------------------------------------------------------------------
+document.addEventListener('DOMContentLoaded', () => {
+  const visualCards = document.querySelectorAll('.visual-category-card');
+  visualCards.forEach((card) => {
+    card.addEventListener('click', (e) => {
+      // Allow natural anchor scrolling to #menu-nav
+      const categoryId = card.getAttribute('data-category');
+      const targetChip = document.querySelector('.nav-chip[data-category="' + categoryId + '"]');
+      
+      if (targetChip) {
+        // Trigger the filtering behavior
+        targetChip.click();
+      }
+    });
+  });
+});

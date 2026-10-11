@@ -1,13 +1,22 @@
 {
-  "name": "Page 26 Cheesecakes & Bakes",
+  "name": "26th-bakehouse",
   "version": "1.0.0",
-  "description": "Page 26 Cheesecakes & Bakes",
+  "description": "26th Bakehouse Cheesecakes & Patisserie",
   "main": "index.html",
   "scripts": {
     "start": "npx serve .",
     "dev": "npx serve ."
   },
-  "keywords": ["page26", "bakery", "menu", "whatsapp-ordering", "eggless"],
-  "author": "Page 26",
-  "license": "MIT"
+  "keywords": [
+    "26th-bakehouse",
+    "bakery",
+    "menu",
+    "whatsapp-ordering",
+    "eggless"
+  ],
+  "author": "26th Bakehouse",
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer-core": "^25.13.0"
+  }
 }

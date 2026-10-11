@@ -1,6 +1,6 @@
-# Page 26 — Cheesecakes & Bakes (Online Menu & WhatsApp Ordering)
+# 26th Bakehouse — Cheesecakes & Patisserie (Online Menu & WhatsApp Ordering)
 
-A modern, mobile-first responsive web application for **Page 26**, allowing customers to browse artisanal eggless cheesecakes, cakes, brownies, muffins, and cupcakes, and place pre-orders directly via **WhatsApp** or **Phone Call**.
+A modern, mobile-first responsive web application for **26th Bakehouse**, allowing customers to browse artisanal eggless cheesecakes, cakes, brownies, muffins, and cupcakes, and place pre-orders directly via **WhatsApp** or **Phone Call**.
 
 ---
 
@@ -20,7 +20,7 @@ A modern, mobile-first responsive web application for **Page 26**, allowing cust
 ## 📂 Project Structure
 
 ```text
-page-26-menu/
+26th-bakehouse/
 ├── index.html         # Main web page structure & layout
 ├── style.css          # Artisanal bakery styling & responsive design
 ├── app.js             # Cart, search, filtering & WhatsApp integration logic
@@ -38,7 +38,7 @@ page-26-menu/
 1. Open PowerShell or Terminal.
 2. Navigate to the project folder:
    ```powershell
-   cd D:\Projects\page-26-menu
+   cd D:\Projects\26th-bakehouse
    ```
 3. Run with any local server (or simply double-click `index.html` to open in any web browser!):
    ```powershell
@@ -54,28 +54,28 @@ page-26-menu/
 
 1. Initialize git and commit:
    ```powershell
-   cd D:\Projects\page-26-menu
+   cd D:\Projects\26th-bakehouse
    git init
    git add .
-   git commit -m "Initial commit of Page 26 menu app"
+   git commit -m "Initial commit of 26th Bakehouse menu app"
    ```
-2. Create a new repository on [GitHub](https://github.com/new) named `page-26-menu`.
+2. Create a new repository on [GitHub](https://github.com/new) named `26th-bakehouse`.
 3. Push your code to GitHub:
    ```powershell
-   git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/page-26-menu.git
+   git remote add origin https://github.com/<YOUR_GITHUB_USERNAME>/26th-bakehouse.git
    git branch -M main
    git push -u origin main
    ```
 4. Go to [Vercel](https://vercel.com) and log in with your GitHub account.
 5. Click **"Add New..."** > **"Project"**.
-6. Select your `page-26-menu` repository.
-7. Click **Deploy**. In under 15 seconds, Vercel gives you a free live URL (e.g. `https://page-26-menu.vercel.app`) with free SSL!
+6. Select your `26th-bakehouse` repository.
+7. Click **Deploy**. In under 15 seconds, Vercel gives you a free live URL (e.g. `https://26th-bakehouse.vercel.app`) with free SSL!
 
 ### Method 2: Via Vercel CLI
 
 1. Run:
    ```powershell
-   cd D:\Projects\page-26-menu
+   cd D:\Projects\26th-bakehouse
    npx vercel
    ```
 2. Follow the on-screen prompts to log in and confirm deployment.

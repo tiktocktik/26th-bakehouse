@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PAGE 26 — Artisanal Eggless Patisserie & Bakes (Bangalore)
+   26TH BAKEHOUSE — Artisanal Eggless Patisserie & Bakes (Bangalore)
    Bespoke Editorial Luxury Design System
    ========================================================================== */
 
@@ -104,6 +104,19 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
+/* Accessible Visually Hidden utility */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -163,18 +176,18 @@ img {
   contain: paint;
 }
 
-.marquee-track {
+.marquee-track { animation: marqueeRoll 120s linear infinite !important;
   display: flex;
   width: max-content;
   will-change: transform;
   transform: translate3d(0, 0, 0);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
-  animation: marqueeRoll 48s linear infinite;
+  animation: marqueeRoll 120s linear infinite;
 }
 
 .top-announcement:hover .marquee-track,
-.top-announcement:active .marquee-track {
+.top-announcement:active .marquee-track { animation: marqueeRoll 120s linear infinite !important;
   animation-play-state: paused;
 }
 
@@ -207,7 +220,7 @@ img {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track {
+  .marquee-track { animation: marqueeRoll 120s linear infinite !important;
     animation-play-state: paused;
   }
 }
@@ -268,23 +281,53 @@ img {
   }
 }
 
-/* Footer Brand Logo */
-.footer-logo-link {
-  display: inline-block;
-  margin-bottom: 12px;
+.brand-logo-img-square {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: block;
+  flex-shrink: 0;
   transition: transform 0.2s ease;
 }
 
-.footer-logo-link:hover {
-  transform: scale(1.02);
+.brand-logo-text {
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--brand-cocoa, #3E271D);
+  letter-spacing: 2px;
+  line-height: 1;
 }
 
-.footer-logo-img {
-  height: auto;
-  max-width: 175px;
-  object-fit: contain;
-  display: block;
+@media (max-width: 768px) {
+  .brand-logo-img-square {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+  }
 }
+
+@media (max-width: 520px) {
+  .brand-logo-img-square {
+    width: 38px;
+    height: 38px;
+  }
+  .brand-logo-text {
+    font-size: 19px;
+    letter-spacing: 1.2px;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-logo-text {
+    font-size: 16px;
+    letter-spacing: 0.8px;
+  }
+}
+
+/* (Legacy footer logo styles consolidated in Footer Section below) */
 
 /* Sheet Header Logo Mark */
 .sheet-title-row {
@@ -1580,68 +1623,105 @@ img {
   color: var(--text-primary);
 }
 
+/* Utility class for toggling between Add button and Stepper */
+.is-hidden {
+  display: none !important;
+}
+
+.patisserie-card.card-in-cart {
+  border-color: rgba(197, 138, 56, 0.55);
+  box-shadow: 0 10px 28px -6px rgba(197, 138, 56, 0.18);
+}
+
 .card-action-controls {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   gap: 8px;
+  min-width: 110px;
 }
 
-.stepper-widget {
-  display: inline-flex;
-  align-items: center;
-  border: 1px solid var(--border-strong);
-  border-radius: var(--radius-pill);
-  background-color: var(--bg-surface);
-  overflow: hidden;
-}
-
-.stepper-widget .stepper-btn {
-  width: 28px;
-  height: 28px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  transition: background-color 0.15s ease;
-  cursor: pointer;
-}
-
-.stepper-widget .stepper-btn:hover {
-  background-color: var(--bg-surface-subtle);
-  color: var(--brand-gold);
-}
-
-.stepper-widget .stepper-val {
-  min-width: 24px;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
+/* 1. Default State: Clean, prominent + Add button */
 .btn-card-add {
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  padding: 8px 16px;
+  padding: 8px 18px;
   border-radius: var(--radius-pill);
-  background-color: var(--brand-cocoa);
+  background: var(--brand-cocoa);
   color: #FFFFFF;
-  font-size: 0.85rem;
+  border: 1px solid transparent;
+  font-size: 0.88rem;
   font-weight: 700;
-  transition: all 0.2s ease;
+  letter-spacing: 0.02em;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   cursor: pointer;
+  min-width: 96px;
+  box-shadow: 0 2px 6px rgba(44, 26, 17, 0.12);
 }
 
 .btn-card-add:hover {
-  background-color: var(--brand-gold);
+  background: var(--brand-gold);
   color: #130D0A;
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 138, 56, 0.3);
+}
+
+.btn-card-add:active {
+  transform: scale(0.97);
 }
 
 .btn-add-icon {
   font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+/* 2. In-Cart State: Active Stepper Widget */
+.stepper-widget {
+  display: inline-flex;
+  align-items: center;
+  border: 1.5px solid var(--brand-gold);
+  border-radius: var(--radius-pill);
+  background-color: #FFFDF9;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(197, 138, 56, 0.15);
+  height: 38px;
+}
+
+.stepper-widget .stepper-btn {
+  width: 36px;
+  height: 38px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--brand-cocoa);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.stepper-widget .stepper-btn:hover {
+  background-color: var(--brand-gold);
+  color: #130D0A;
+}
+
+.stepper-widget .stepper-btn:active {
+  transform: scale(0.9);
+}
+
+.stepper-widget .stepper-val {
+  min-width: 26px;
+  text-align: center;
+  font-size: 0.92rem;
+  font-weight: 800;
+  color: var(--brand-cocoa);
+  padding: 0 4px;
 }
 
 /* Cart Item Thumbnail */
@@ -1905,7 +1985,7 @@ img {
 }
 
 .modal-price-val {
-  font-size: 1.5rem;
+  font-size: 2.2rem; font-weight: bold; letter-spacing: 1px;
   font-weight: 800;
   color: var(--brand-gold);
 }
@@ -2455,6 +2535,26 @@ img {
   }
 }
 
+.footer-logo-link {
+  display: inline-block;
+  margin-bottom: 16px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-logo-link:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.footer-logo-img {
+  height: 48px;
+  width: auto;
+  max-width: 230px;
+  object-fit: contain;
+  display: block;
+}
+
 .footer-brand-title {
   font-family: var(--font-serif);
   font-size: 1.8rem;
@@ -2680,6 +2780,13 @@ img {
   transition: opacity 0.25s ease;
 }
 
+@media (min-width: 768px) {
+  .checkout-overlay {
+    align-items: stretch;
+    justify-content: flex-end;
+  }
+}
+
 .checkout-overlay.open {
   opacity: 1;
   pointer-events: auto;
@@ -2699,8 +2806,23 @@ img {
   overflow: hidden;
 }
 
+@media (min-width: 768px) {
+  .checkout-sheet {
+    max-width: 480px;
+    max-height: 100vh;
+    border-radius: 24px 0 0 24px;
+    transform: translateX(100%);
+  }
+}
+
 .checkout-overlay.open .checkout-sheet {
   transform: translateY(0);
+}
+
+@media (min-width: 768px) {
+  .checkout-overlay.open .checkout-sheet {
+    transform: translateX(0);
+  }
 }
 
 .sheet-header {
@@ -3924,13 +4046,53 @@ body.dock-active .floating-wa-fab-wrap {
     border-radius: 16px;
   }
 
+  .hero-crest-badge {
+    margin-bottom: 8px !important;
+    padding: 4px 12px !important;
+    font-size: 0.65rem !important;
+    letter-spacing: 0.04em !important;
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    justify-content: center !important;
+    white-space: normal !important;
+  }
+
+  .hero-brand-title {
+    font-size: clamp(1.75rem, 6.8vw, 2.3rem) !important;
+    line-height: 1.15 !important;
+    margin-bottom: 4px !important;
+    text-align: center !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+
   .hero-actions-row {
     order: 3;
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    gap: 8px;
-    margin-bottom: 6px;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    width: 100% !important;
+    max-width: 420px !important;
+    margin: 4px auto 8px !important;
+    gap: 10px !important;
+  }
+
+  .btn-hero-primary,
+  .btn-hero-wa {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: 100% !important;
+    padding: 12px 8px !important;
+    font-size: 0.82rem !important;
+    font-weight: 700 !important;
+    white-space: nowrap !important;
+    text-align: center !important;
+    box-sizing: border-box !important;
+  }
+
+  .btn-hero-secondary {
+    display: none !important;
   }
 
   .hero-narrative-group {
@@ -4031,20 +4193,26 @@ body.dock-active .floating-wa-fab-wrap {
 }
 
 @media (max-width: 640px) {
-  /* Hide header WhatsApp button so brand logo gets ample breathing room */
-  .header-nav-actions .btn-nav-wa {
-    display: none !important;
-  }
-
   .nav-brand-group {
-    flex: 1 1 auto;
+    flex: 0 1 auto;
     min-width: 0;
   }
 
-  .brand-logo-img {
-    height: 40px;
-    max-width: 195px;
-    width: auto;
+  .header-nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .header-nav-actions .btn-nav-wa {
+    display: inline-flex !important;
+    padding: 6px 10px;
+    font-size: 0.78rem;
+    gap: 5px;
+  }
+
+  .header-nav-actions .btn-nav-wa .btn-text {
+    display: inline !important;
   }
 
   /* Compact Menu Modal on mobile to prevent cropping */
@@ -4321,3 +4489,290 @@ body.dock-active .floating-wa-fab-wrap {
     bottom: calc(10px + env(safe-area-inset-bottom, 0px));
   }
 }
+
+/* ==========================================================================
+   Header Brand Logo & Typography Lockup
+   ========================================================================== */
+.brand-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  transition: transform 0.2s ease;
+}
+
+.brand-logo-link:hover {
+  transform: translateY(-1px);
+}
+
+.brand-header-logo-mark {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(44, 26, 17, 0.12));
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-logo-link:hover .brand-header-logo-mark {
+  transform: scale(1.04);
+}
+
+.brand-header-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brand-header-title {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--brand-cocoa);
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.brand-header-sub {
+  font-family: var(--font-sans);
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--brand-gold);
+  text-transform: uppercase;
+  margin-top: 2px;
+  white-space: nowrap;
+}
+
+/* On mobile (under 600px): hide redundant text so the 48px logo medallion stands prominent and uncrowded */
+@media (max-width: 600px) {
+  .brand-header-text {
+    display: none;
+  }
+  .brand-header-logo-mark {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+/* Footer Brand Logo & Typography */
+.footer-logo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 16px;
+  text-decoration: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.footer-logo-link:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.footer-logo-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0;
+  filter: drop-shadow(0 2px 8px rgba(44, 26, 17, 0.1));
+}
+
+.footer-brand-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-brand-title {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--brand-cocoa);
+  line-height: 1.1;
+}
+
+.footer-brand-sub {
+  font-family: var(--font-sans);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--brand-gold);
+  margin-top: 3px;
+}
+
+/* Home Page Category Explore Banner */
+.home-menu-explore-banner {
+  background: linear-gradient(135deg, rgba(200, 138, 56, 0.08) 0%, rgba(44, 26, 17, 0.04) 100%);
+  border: 1px solid rgba(200, 138, 56, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  margin: 32px 0 20px;
+  text-align: center;
+}
+
+.h-explore-title {
+  font-family: var(--font-serif);
+  font-size: 1.45rem;
+  font-weight: 700;
+  color: var(--brand-cocoa);
+  margin-bottom: 6px;
+}
+
+.h-explore-sub {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto 18px;
+  line-height: 1.5;
+}
+
+.h-explore-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn-explore-cat {
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: var(--radius-pill);
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-primary);
+  font-size: 0.84rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 6px rgba(44, 26, 17, 0.04);
+}
+
+.btn-explore-cat:hover {
+  background-color: var(--brand-gold-light);
+  border-color: var(--brand-gold);
+  color: var(--brand-cocoa);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(200, 138, 56, 0.2);
+}
+
+/* ==========================================================================
+   Visual Category Grid (100% Fluid Mobile Responsive)
+   ========================================================================== */
+.visual-categories-section {
+  padding: 3rem 1.25rem 2.5rem;
+  background-color: var(--bg-body, #faf7f2);
+}
+
+.visual-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.visual-category-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  height: 320px;
+  display: flex;
+  align-items: flex-end;
+  text-decoration: none;
+  background-color: var(--bg-surface);
+}
+
+.visual-category-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(44, 26, 17, 0.12);
+}
+
+.visual-category-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.visual-category-card:hover .visual-category-img {
+  transform: scale(1.06);
+}
+
+.visual-category-overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(20, 14, 11, 0.88) 0%, rgba(20, 14, 11, 0.5) 60%, rgba(0,0,0,0) 100%);
+  padding: 3rem 1.5rem 1.5rem;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.cat-pill {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--brand-gold, #C88A38);
+  margin-bottom: 2px;
+}
+
+.visual-category-title {
+  color: #ffffff;
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  margin: 0;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  line-height: 1.15;
+}
+
+@media (max-width: 768px) {
+  .visual-categories-section {
+    padding: 1.75rem 1rem 1.5rem;
+  }
+  .visual-category-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .visual-category-card {
+    height: 200px;
+    border-radius: 14px;
+  }
+  .visual-category-title {
+    font-size: 1.4rem;
+  }
+  .visual-category-overlay {
+    padding: 2.2rem 1.25rem 1rem;
+  }
+}
+
+/* Accessibility Focus States */
+*:focus-visible {
+  outline: 2px solid var(--brand-gold);
+  outline-offset: 2px;
+  border-radius: var(--radius-xs);
+}
+
+

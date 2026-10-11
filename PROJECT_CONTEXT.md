@@ -1,16 +1,17 @@
-# Project Context & Engineering Log — Page 26 Cheesecakes & Bakes
+# Project Context & Engineering Log — 26th Bakehouse Cheesecakes & Patisserie
 
-> **Last Updated**: October 7, 2026  
+> **Last Updated**: October 12, 2026  
+> **Brand**: `26th Bakehouse` (formerly Page 26 / Ovenhug)  
 > **Repository**: `https://github.com/tiktocktik/page-26-menu`  
 > **Production Deployment**: `https://page26.vercel.app`  
-> **Local Directory**: `D:\Projects\page-26-menu`  
+> **Local Directory**: `D:\Projects\26th-bakehouse`  
 > **Primary Business Contact**: WhatsApp `+91 8780547928` (Bangalore, India)
 
 ---
 
 ## 1. Executive Summary & Brand Identity
 
-**Page 26** is an artisanal, boutique home patisserie based in **Bangalore, Karnataka**.
+**26th Bakehouse** is an artisanal, boutique home patisserie based in **Bangalore, Karnataka**.
 - **100% Exclusively Eggless**: Every cake, cheesecake, brownie, muffin, and cupcake is strictly vegetarian/eggless.
 - **Premium Ingredients**: All chocolate baked goods are crafted exclusively with **pure couverture chocolate** (no compound chocolate).
 - **Made-to-Order Freshness**: Pre-orders strictly require **1 week's notice (minimum 7 days)** to ensure ingredients are procured fresh and baked to order.

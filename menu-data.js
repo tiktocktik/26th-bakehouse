@@ -1,9 +1,9 @@
-// Page 26 - Menu Data Configuration
+// 26th Bakehouse - Menu Data Configuration
 // Boutique Artisanal Patisserie in Bangalore, Karnataka
 
 window.PAGE26_CONFIG = {
-  storeName: "PAGE 26",
-  tagline: "CHEESECAKES & BAKES",
+  storeName: "26TH BAKEHOUSE",
+  tagline: "CHEESECAKES & PATISSERIE",
   subheading: "Artisanal Eggless Patisserie • Bangalore",
   phone: "+91 8780547928",
   phoneRaw: "918780547928",
@@ -305,7 +305,7 @@ window.PAGE26_ITEMS = [
 window.PAGE26_FAQS = [
   {
     q: "Why do pre-orders require 1 week's notice?",
-    a: "Every single bake at Page 26 is made entirely from scratch in small, artisanal batches. We procure fresh, premium ingredients—including fresh fruit compotes and pure couverture chocolate—specifically for your order. We never freeze or mass-produce ahead of time, ensuring you receive your bake at peak freshness and flavor."
+    a: "Every single bake at 26th Bakehouse is made entirely from scratch in small, artisanal batches. We procure fresh, premium ingredients—including fresh fruit compotes and pure couverture chocolate—specifically for your order. We never freeze or mass-produce ahead of time, ensuring you receive your bake at peak freshness and flavor."
   },
   {
     q: "Are all your cakes and desserts 100% eggless?",
@@ -313,7 +313,7 @@ window.PAGE26_FAQS = [
   },
   {
     q: "What is couverture chocolate and why does it matter?",
-    a: "Unlike commercial bakeries that use compound chocolate made with hydrogenated vegetable palm fats, Page 26 exclusively uses pure couverture chocolate containing high percentages of real cocoa butter. Couverture melts luxuriously at body temperature, giving a velvety mouthfeel and deep, complex chocolate flavor with zero waxy residue."
+    a: "Unlike commercial bakeries that use compound chocolate made with hydrogenated vegetable palm fats, 26th Bakehouse exclusively uses pure couverture chocolate containing high percentages of real cocoa butter. Couverture melts luxuriously at body temperature, giving a velvety mouthfeel and deep, complex chocolate flavor with zero waxy residue."
   },
   {
     q: "How does delivery work across Bangalore?",
@@ -335,7 +335,7 @@ window.PAGE26_REVIEWS = [
     locality: "Indiranagar, Bangalore",
     rating: 5,
     highlight: "The best New York Cheesecake in Bangalore!",
-    review: "As vegetarians, finding authentic dense New York cheesecake that doesn't feel like gelatin pudding is almost impossible. Page 26's Classic New York is perfection—rich, creamy, authentic biscuit crust. Worth every bit of the 1-week wait!"
+    review: "As vegetarians, finding authentic dense New York cheesecake that doesn't feel like gelatin pudding is almost impossible. 26th Bakehouse's Classic New York is perfection—rich, creamy, authentic biscuit crust. Worth every bit of the 1-week wait!"
   },
   {
     name: "Rohan & Sneha Mehta",
