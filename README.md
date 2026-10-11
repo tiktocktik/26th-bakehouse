@@ -38,7 +38,7 @@ A modern, mobile-first responsive web application for **26th Bakehouse**, allowi
 1. Open PowerShell or Terminal.
 2. Navigate to the project folder:
    ```powershell
-   cd D:\Workspace\01_Projects\Code\26th-bakehouse
+   cd D:\Workspace\Projects\26th_Bakehouse
    ```
 3. Run with any local server (or simply double-click `index.html` to open in any web browser!):
    ```powershell
@@ -54,7 +54,7 @@ A modern, mobile-first responsive web application for **26th Bakehouse**, allowi
 
 1. Initialize git and commit:
    ```powershell
-   cd D:\Workspace\01_Projects\Code\26th-bakehouse
+   cd D:\Workspace\Projects\26th_Bakehouse
    git init
    git add .
    git commit -m "Initial commit of 26th Bakehouse menu app"
@@ -75,7 +75,7 @@ A modern, mobile-first responsive web application for **26th Bakehouse**, allowi
 
 1. Run:
    ```powershell
-   cd D:\Workspace\01_Projects\Code\26th-bakehouse
+   cd D:\Workspace\Projects\26th_Bakehouse
    npx vercel
    ```
 2. Follow the on-screen prompts to log in and confirm deployment.
