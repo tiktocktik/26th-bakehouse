@@ -40,9 +40,9 @@ A modern, mobile-first responsive web application for **26th Bakehouse**, allowi
    ```powershell
    cd D:\Workspace\Projects\26th_Bakehouse
    ```
-3. Run with any local server (or simply double-click `index.html` to open in any web browser!):
+3. Run with local server (or simply open `index.html` in your browser):
    ```powershell
-   npx serve .
+   pnpm dev
    ```
 4. Open the displayed URL (typically `http://localhost:3000`).
 

@@ -2,7 +2,7 @@
 
 > **Last Updated**: October 12, 2026  
 > **Brand**: `26th Bakehouse` (formerly Page 26 / Ovenhug)  
-> **Repository**: `https://github.com/tiktocktik/page-26-menu`  
+> **Repository**: `https://github.com/tiktocktik/26th-bakehouse`  
 > **Production Deployment**: `https://page26.vercel.app`  
 > **Local Directory**: `D:\Workspace\Projects\26th_Bakehouse`  
 > **Primary Business Contact**: WhatsApp `+91 8780547928` (Bangalore, India)
@@ -93,7 +93,7 @@
 ## 3. Technical Architecture & File Map
 
 ```text
-D:\Projects\page-26-menu/
+D:\Workspace\Projects\26th_Bakehouse/
 ├── index.html           # Main semantic structure, navigation, checkout drawer, modals
 ├── style.css            # Responsive styles, dark/light CSS variables, animations
 ├── app.js               # Application state, cart persistence, maps, WhatsApp builder
@@ -226,7 +226,7 @@ When the user taps **"Confirm Pre-Order on WhatsApp"**, the app encodes and open
 ### How to Update Prices or Menu Items
 All product records are stored in `menu-data.js` under `window.PAGE26_ITEMS`.
 To modify a price or add a flavour:
-1. Open [`menu-data.js`](file:///D:/Projects/page-26-menu/menu-data.js).
+1. Open [`menu-data.js`](file:///D:/Workspace/Projects/26th_Bakehouse/menu-data.js).
 2. Edit the `options` array with new `size` and `price` fields.
 3. Test locally using `npx serve .` at `http://localhost:3000`.
 4. Stage, commit, and push (`git push origin main`) to auto-deploy to Vercel.
