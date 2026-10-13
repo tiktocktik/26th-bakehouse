@@ -4,8 +4,8 @@
   "description": "26th Bakehouse Cheesecakes & Patisserie",
   "main": "index.html",
   "scripts": {
-    "start": "npx serve .",
-    "dev": "npx serve ."
+    "start": "serve .",
+    "dev": "serve ."
   },
   "keywords": [
     "26th-bakehouse",
@@ -18,5 +18,8 @@
   "license": "MIT",
   "dependencies": {
     "puppeteer-core": "^25.13.0"
+  },
+  "devDependencies": {
+    "serve": "^14.2.6"
   }
 }

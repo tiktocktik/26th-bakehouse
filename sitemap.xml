@@ -33,14 +33,64 @@
     </image:image>
   </url>
   <url>
+    <loc>https://page26.vercel.app/cheesecakes</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://page26.vercel.app/images/hero_cheesecake.jpg</image:loc>
+      <image:title>Artisanal Baked Cheesecakes Bangalore - 26th Bakehouse</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://page26.vercel.app/cakes</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://page26.vercel.app/images/chocolate_ganache_cake.jpg</image:loc>
+      <image:title>Pure Couverture Celebration Cakes Bangalore - 26th Bakehouse</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://page26.vercel.app/brownies</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://page26.vercel.app/images/classic_fudge_brownie.jpg</image:loc>
+      <image:title>Couverture Fudge Brownies Bangalore - 26th Bakehouse</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://page26.vercel.app/muffins</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://page26.vercel.app/images/chocolate_chunk_muffin.jpg</image:loc>
+      <image:title>Bakery Muffins Bangalore - 26th Bakehouse</image:title>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://page26.vercel.app/cupcakes</loc>
+    <lastmod>2026-10-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <image:image>
+      <image:loc>https://page26.vercel.app/images/strawberry_swirl_cupcake.jpg</image:loc>
+      <image:title>Artisanal Eggless Cupcakes Bangalore - 26th Bakehouse</image:title>
+    </image:image>
+  </url>
+  <url>
     <loc>https://page26.vercel.app/menu-card-render.html</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://page26.vercel.app/llms.txt</loc>
-    <lastmod>2026-10-08</lastmod>
+    <lastmod>2026-10-13</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>

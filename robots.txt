@@ -1,4 +1,4 @@
-# Robots.txt for PAGE 26 Cheesecakes & Bakes (Bangalore)
+# Robots.txt for 26TH BAKEHOUSE Cheesecakes & Patisserie (Bangalore)
 # Fully optimized for Google Search, Bing, and AI Search Engines (ChatGPT, Gemini, Claude, Perplexity, Grok)
 
 User-agent: *
