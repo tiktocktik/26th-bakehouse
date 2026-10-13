@@ -1342,4 +1342,21 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+
+  // --------------------------------------------------------------------------
+  // 16. Floating WhatsApp Concierge Scroll Trigger
+  // --------------------------------------------------------------------------
+  const waFabWrap = document.getElementById('floating-wa-wrap');
+  if (waFabWrap) {
+    const handleFabScroll = () => {
+      if (window.scrollY > 220) {
+        waFabWrap.classList.add('visible');
+      } else {
+        waFabWrap.classList.remove('visible');
+      }
+    };
+    window.addEventListener('scroll', handleFabScroll, { passive: true });
+    handleFabScroll();
+  }
 });
+

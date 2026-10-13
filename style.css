@@ -3850,8 +3850,18 @@ img {
   right: 18px;
   z-index: 68;
   display: block;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(16px) scale(0.92);
+  transition: bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.3s ease,
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.floating-wa-fab-wrap.visible {
   pointer-events: auto;
-  transition: bottom 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 1;
+  transform: translateY(0) scale(1);
 }
 
 .floating-wa-fab {
@@ -4193,26 +4203,49 @@ body.dock-active .floating-wa-fab-wrap {
 }
 
 @media (max-width: 640px) {
+  .header-inner {
+    padding: 8px 12px;
+    gap: 8px;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .nav-brand-group {
-    flex: 0 1 auto;
+    flex: 1 1 auto;
     min-width: 0;
+    overflow: hidden;
+  }
+
+  .brand-logo-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+    max-width: 100%;
   }
 
   .header-nav-actions {
     display: flex;
     align-items: center;
     gap: 6px;
+    flex-shrink: 0;
+    margin-left: auto;
   }
 
-  .header-nav-actions .btn-nav-wa {
-    display: inline-flex !important;
-    padding: 6px 10px;
-    font-size: 0.78rem;
-    gap: 5px;
+  .header-nav-actions .btn-nav-action {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+    padding: 0 !important;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
 
-  .header-nav-actions .btn-nav-wa .btn-text {
-    display: inline !important;
+  .header-nav-actions .btn-nav-action .btn-text {
+    display: none !important;
   }
 
   /* Compact Menu Modal on mobile to prevent cropping */
@@ -4550,11 +4583,50 @@ body.dock-active .floating-wa-fab-wrap {
 /* On mobile (under 600px): hide redundant text so the 48px logo medallion stands prominent and uncrowded */
 @media (max-width: 600px) {
   .brand-header-text {
-    display: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+    flex-shrink: 1;
+    overflow: hidden;
+  }
+  .brand-header-title {
+    font-size: 0.98rem;
+    line-height: 1.15;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .brand-header-sub {
+    font-size: 0.50rem;
+    letter-spacing: 0.12em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .brand-header-logo-mark {
-    width: 48px;
-    height: 48px;
+    width: 40px;
+    height: 40px;
+    border: 1.5px solid rgba(197, 138, 56, 0.55);
+    background: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(44, 26, 17, 0.12);
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  .brand-header-title {
+    font-size: 0.88rem;
+    letter-spacing: 0.03em;
+  }
+  .brand-header-sub {
+    font-size: 0.46rem;
+    letter-spacing: 0.08em;
+  }
+  .header-nav-actions .btn-nav-phone {
+    display: none !important;
   }
 }
 
