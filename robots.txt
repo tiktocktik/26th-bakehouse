@@ -1,4 +1,4 @@
-# Robots.txt for 26TH BAKEHOUSE Cheesecakes & Patisserie (Bangalore)
+﻿# Robots.txt for 26TH BAKEHOUSE Cheesecakes & Patisserie (Bangalore)
 # Fully optimized for Google Search, Bing, and AI Search Engines (ChatGPT, Gemini, Claude, Perplexity, Grok)
 
 User-agent: *
@@ -34,6 +34,6 @@ User-agent: Grok
 Allow: /
 
 # Sitemap & LLM Discovery Index
-Sitemap: https://page26.vercel.app/sitemap.xml
+Sitemap: https://26th-bakehouse.vercel.app/sitemap.xml
 # LLM Knowledge Graph Spec
-# See: https://page26.vercel.app/llms.txt
+# See: https://26th-bakehouse.vercel.app/llms.txt

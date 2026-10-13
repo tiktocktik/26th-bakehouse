@@ -1,9 +1,9 @@
-# Project Context & Engineering Log — 26th Bakehouse Cheesecakes & Patisserie
+﻿# Project Context & Engineering Log — 26th Bakehouse Cheesecakes & Patisserie
 
 > **Last Updated**: October 12, 2026  
 > **Brand**: `26th Bakehouse` (formerly Page 26 / Ovenhug)  
 > **Repository**: `https://github.com/tiktocktik/26th-bakehouse`  
-> **Production Deployment**: `https://page26.vercel.app`  
+> **Production Deployment**: `https://26th-bakehouse.vercel.app`  
 > **Local Directory**: `D:\Workspace\Projects\26th_Bakehouse`  
 > **Primary Business Contact**: WhatsApp `+91 8780547928` (Bangalore, India)
 
